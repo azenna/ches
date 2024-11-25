@@ -2,6 +2,12 @@ package main
 
 import "fmt"
 
+type Piece struct {
+	ChessType type
+    Color color
+
+}
+
 func main() {
 	fmt.Println("Hello world")
 	fmt.Println("Hello world")
