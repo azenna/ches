@@ -23,7 +23,7 @@ const (
 )
 
 type Piece struct {
-	piecetype PieceType
+	pieceType PieceType
 	color     Color
 }
 
@@ -50,7 +50,7 @@ func PrintPiece(piece Piece) {
 		s = "B"
 	}
 	t := " "
-	switch piece.piecetype {
+	switch piece.pieceType {
 	case Pawn:
 		t = "P"
 	case Rook:
@@ -66,7 +66,47 @@ func PrintPiece(piece Piece) {
 	}
 	fmt.Printf("[%s%s]", s, t)
 }
+func PlacePiece(board *Board, i int, j int) {
+	pieceType := NoPiece
+	pieceColor := NoColor
+
+	if i <= 1 {
+		pieceColor = White
+
+	} else if i >= 6 {
+		pieceColor = Black
+	}
+
+	if i == 1 || i == 6 {
+		pieceType = Pawn
+
+	} else if i == 0 || i == 7 {
+		if j == 0 || j == 7 {
+			pieceType = Rook
+		} else if j == 1 || j == 6 {
+			pieceType = Knight
+		} else if j == 2 || j == 5 {
+			pieceType = Bishop
+		} else if (i == 0 && j == 3) || (i == 7 && j == 4) {
+			pieceType = King
+		} else if (i == 0 && j == 4) || (i == 7 && j == 3) {
+			pieceType = Queen
+		}
+	}
+
+	board.state[i][j] = Piece{pieceType, pieceColor}
+}
+
+func InitBoard(board *Board) {
+	for i := range 8 {
+		for j := range 8 {
+			PlacePiece(board, i, j)
+		}
+	}
+}
+
 func main() {
 	board := Board{[8][8]Piece{}}
+	InitBoard(&board)
 	PrintBoard(board)
 }
