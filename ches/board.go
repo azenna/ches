@@ -1,6 +1,8 @@
 package ches
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Board struct {
 	State [8][8]Piece
@@ -53,4 +55,28 @@ func (board *Board) PlacePiece(i int, j int) {
 	}
 
 	board.State[i][j] = Piece{pieceType, pieceColor}
+}
+
+func ColumnFromFile(file string) (int, error) {
+
+	switch file {
+	case "A":
+		return 0, nil
+	case "B":
+		return 1, nil
+	case "C":
+		return 2, nil
+	case "D":
+		return 3, nil
+	case "E":
+		return 4, nil
+	case "F":
+		return 5, nil
+	case "G":
+		return 6, nil
+	case "H":
+		return 7, nil
+	default:
+		return -1, fmt.Errorf("%s is not a valid file", file)
+	}
 }
