@@ -1,1 +1,1 @@
-# Ches is chess but with less s
+# Ches is chess but with less ess
